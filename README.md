@@ -10,11 +10,14 @@
     environment variable VAULT_ADDR is set, as we need to use it for the URLs
   1. Vault token in env var VAULT_TOKEN (recommended) or in variable+providers.tf
 1. For testing, users in Okta, and assigned to the groups once created
-  1. In Okta, Directory -> Groups -> `vault_admins` and `vault_devs`
+  1. In Okta, Directory -> Groups -> `vault-admins` and `vault-devs`
 
 
-## 
+## Running
 
+1. Do the prereq's above
+1. `terraform apply`
+1. Assign one of your users to the `vault-admins` and `vault-devs` groups
 1. Test by running `$ vault login -method=oidc -path=okta_oidc role=okta_admin`
   This will open your browser to login with the Okta user assigned to your new vault-admins/vault-devs group, 
   and return a token in the CLI. 
