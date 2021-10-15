@@ -3,7 +3,7 @@
 ## Prerequisites 
 
 1. Define variables from the example `example.auto.tfvars` file
-1. Okta account
+1. Okta developer (https://developer.okta.com) or corporate account
 1. Okta API token - from https://dev-123456-admin.okta.com/admin/access/api/tokens
 1. Vault running (dev mode is fine)
   1. Vault's address in the vault_addr TF variable. This is needed even if the 
