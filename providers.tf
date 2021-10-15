@@ -17,3 +17,8 @@ provider "okta" {
   base_url  = var.okta_base_url
   api_token = var.okta_api_token
 }
+
+provider "vault" {
+  address = var.vault_addr
+  # token = "<your token here> or set as VAULT_TOKEN env var"
+}

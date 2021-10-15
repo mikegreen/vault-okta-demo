@@ -31,7 +31,7 @@ resource "okta_app_oauth" "vault" {
     type        = "FILTER"
     filter_type = "STARTS_WITH"
     name        = "groups"
-    value       = "Vault"
+    value       = "vault"
   }
 }
 
@@ -64,7 +64,7 @@ resource "okta_auth_server_claim" "example" {
   name                    = "groups"
   value_type              = "GROUPS"
   group_filter_type       = "STARTS_WITH"
-  value                   = "vault_"
+  value                   = "vault-"
   scopes                  = ["profile"]
   claim_type              = "IDENTITY"
   always_include_in_token = true
