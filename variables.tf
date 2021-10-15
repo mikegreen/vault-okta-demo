@@ -35,15 +35,15 @@ variable "okta_mount_path" {
   default     = "okta_oidc"
 }
 
-variable "okta_client_id" {
-  type        = string
-  description = "Okta Vault app client ID"
-}
+# variable "okta_client_id" {
+#   type        = string
+#   description = "Okta Vault app client ID"
+# }
 
-variable "okta_client_secret" {
-  type        = string
-  description = "Okta Vault app client secret"
-}
+# variable "okta_client_secret" {
+#   type        = string
+#   description = "Okta Vault app client secret"
+# }
 
 # variable "okta_bound_audiences" {
 #   type        = list(any)
