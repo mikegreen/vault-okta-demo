@@ -4,8 +4,8 @@ resource "okta_group" "vault-admins" {
   description = ""
 }
 
-resource "okta_group" "vault-readonlys" {
-  name        = "vault-readonlys"
+resource "okta_group" "vault-devs" {
+  name        = "vault-devs"
   description = ""
 }
 
@@ -47,7 +47,7 @@ resource "okta_app_group_assignments" "vault-groups" {
     id = okta_group.vault-admins.id
   }
   group {
-    id = okta_group.vault-readonlys.id
+    id = okta_group.vault-devs.id
   }
 }
 
@@ -132,5 +132,10 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
     groups = join(",", each.value.bound_groups)
   }
   verbose_oidc_logging = true
+}
 
+# add KV for developers
+resource "vault_mount" "developers" {
+  type = "kv"
+  path = "developers"
 }

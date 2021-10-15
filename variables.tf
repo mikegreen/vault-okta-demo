@@ -65,7 +65,7 @@ variable "cli_port" {
 variable "okta_default_lease_ttl" {
   type        = string
   description = "Default lease TTL for Vault tokens"
-  default     = "768h"
+  default     = "12h"
 }
 
 variable "okta_max_lease_ttl" {
@@ -89,12 +89,12 @@ Map of Vault role names to their bound groups and token policies. Structure look
 ```
 roles = {
   okta_admin = {
-    token_policies = ["admin"]
-    bound_groups = ["vault_admins"]
+    token_policies = ["admin-policy"]
+    bound_groups = ["vault-admins"]
   },
   okta_devs  = {
-    token_policies = ["devs"]
-    bound_groups = ["vault_devs"]
+    token_policies = ["devs-policy"]
+    bound_groups = ["vault-devs"]
   }
 }
 ```
