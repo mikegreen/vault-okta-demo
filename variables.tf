@@ -3,6 +3,12 @@ variable "vault_addr" {
   description = "Vault address in the form of https://domain:8200"
 }
 
+variable "vault_namespace" {
+  type        = string
+  description = "namespace in which to mount the auth method"
+  default = ""
+}
+
 variable "okta_org_name" {
   type        = string
   description = "The org name, ie for dev environments `dev-123456`"
