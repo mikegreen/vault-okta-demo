@@ -20,5 +20,6 @@ provider "okta" {
 
 provider "vault" {
   address = var.vault_addr
+  namespace="admin"
   # token = "<your token here> or set as VAULT_TOKEN env var"
 }

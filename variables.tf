@@ -35,6 +35,11 @@ variable "okta_mount_path" {
   default     = "okta_oidc"
 }
 
+variable "okta_user_email" {
+  type        = string
+  description = "e-mail of a user to dynamically add to the groups created by this config"
+}
+
 # variable "okta_client_id" {
 #   type        = string
 #   description = "Okta Vault app client ID"
