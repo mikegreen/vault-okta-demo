@@ -10,7 +10,7 @@ resource "okta_group" "vault-devs" {
 }
 
 resource "okta_app_oauth" "vault" {
-  label       = "vault-tfc"
+  label       = var.okta_tile_app_label
   type        = "web"
   grant_types = ["authorization_code", "implicit", "refresh_token"]
   redirect_uris = ["${var.vault_addr}/ui/vault/auth/${var.okta_mount_path}/oidc/callback",
@@ -120,6 +120,7 @@ resource "vault_jwt_auth_backend" "okta_oidc" {
   bound_issuer       = okta_auth_server.vault.issuer
   oidc_client_id     = okta_app_oauth.vault.client_id
   oidc_client_secret = okta_app_oauth.vault.client_secret
+  default_role        = "okta_admin"
   tune {
     listing_visibility = "unauth"
     default_lease_ttl  = var.okta_default_lease_ttl

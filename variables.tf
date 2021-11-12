@@ -46,6 +46,11 @@ variable "okta_user_email" {
   description = "e-mail of a user to dynamically add to the groups created by this config"
 }
 
+variable "okta_tile_app_label" {
+  type        = string
+  description = "HCP Vault"
+}
+
 # variable "okta_client_id" {
 #   type        = string
 #   description = "Okta Vault app client ID"
