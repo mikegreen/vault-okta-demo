@@ -70,8 +70,8 @@ error validating claims: claim "groups" does not match any associated bound clai
 ```
 
 Check the var.roles group names matches the okta_group.vault-* groups setup. 
-
+``` 
 
 ### 6. 
-``` If the UI is non-responsive, or dev tools shows a client token required, this can be from a mismatch of the URLs.  Ensure the Okta and Terraform and Vault all have the same case for the Vault address.
-```
+
+If the UI is non-responsive, or dev tools shows a client token required, this can be from a mismatch of the URLs.  Ensure the Okta and Terraform and Vault all have the same case for the Vault address.
