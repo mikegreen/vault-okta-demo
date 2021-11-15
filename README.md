@@ -70,7 +70,6 @@ error validating claims: claim "groups" does not match any associated bound clai
 ```
 
 Check the var.roles group names matches the okta_group.vault-* groups setup. 
-``` 
 
 ### 6. 
 
