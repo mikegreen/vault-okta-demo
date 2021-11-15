@@ -10,7 +10,7 @@ resource "okta_group" "vault-devs" {
 }
 
 resource "okta_app_oauth" "vault" {
-  label       = "vault"
+  label       = var.okta_tile_app_label
   type        = "web"
   grant_types = ["authorization_code", "implicit", "refresh_token"]
   redirect_uris = ["${var.vault_addr}/ui/vault/auth/${var.okta_mount_path}/oidc/callback",
@@ -22,7 +22,7 @@ resource "okta_app_oauth" "vault" {
   response_types            = ["id_token", "code"]
   consent_method            = "REQUIRED"
   post_logout_redirect_uris = [var.vault_addr]
-  login_uri                 = "${var.vault_addr}/ui/vault/auth/${var.okta_mount_path}/oidc/callback"
+  login_uri                 = "${var.vault_addr}/ui"
   refresh_token_rotation    = "STATIC"
   lifecycle {
     ignore_changes = [groups]
@@ -33,6 +33,10 @@ resource "okta_app_oauth" "vault" {
     name        = "groups"
     value       = "vault"
   }
+  login_mode = "SPEC"
+  login_scopes = ["openid","email","profile"]
+  hide_web = false
+  hide_ios = false
 }
 
 resource "okta_app_oauth_api_scope" "vault" {
@@ -90,6 +94,23 @@ resource "okta_auth_server_policy_rule" "example" {
   grant_type_whitelist = ["client_credentials", "authorization_code", "implicit"]
 }
 
+# Add user to groups
+data "okta_user" "example" {
+  search {
+    name  = "profile.email"
+    value = var.okta_user_email
+  }
+}
+
+resource "okta_user_group_memberships" "example" {
+  user_id = data.okta_user.example.id
+  groups = [
+    okta_group.vault-admins.id,
+    okta_group.vault-devs.id,
+  ]
+}
+
+
 # Vault config
 resource "vault_jwt_auth_backend" "okta_oidc" {
   description        = "Okta OIDC"
@@ -99,6 +120,7 @@ resource "vault_jwt_auth_backend" "okta_oidc" {
   bound_issuer       = okta_auth_server.vault.issuer
   oidc_client_id     = okta_app_oauth.vault.client_id
   oidc_client_secret = okta_app_oauth.vault.client_secret
+  default_role        = "okta_admin"
   tune {
     listing_visibility = "unauth"
     default_lease_ttl  = var.okta_default_lease_ttl

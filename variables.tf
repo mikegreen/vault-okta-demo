@@ -3,6 +3,12 @@ variable "vault_addr" {
   description = "Vault address in the form of https://domain:8200"
 }
 
+variable "vault_namespace" {
+  type        = string
+  description = "namespace in which to mount the auth method"
+  default = ""
+}
+
 variable "okta_org_name" {
   type        = string
   description = "The org name, ie for dev environments `dev-123456`"
@@ -33,6 +39,16 @@ variable "okta_mount_path" {
   type        = string
   description = "Mount path for Okta auth"
   default     = "okta_oidc"
+}
+
+variable "okta_user_email" {
+  type        = string
+  description = "e-mail of a user to dynamically add to the groups created by this config"
+}
+
+variable "okta_tile_app_label" {
+  type        = string
+  description = "HCP Vault"
 }
 
 # variable "okta_client_id" {
